@@ -11,21 +11,21 @@
 using namespace std;
 
 int esPosible(string const cadena) {
-    int n = cadena.size();
+    int n = cadena.size() - 1;
 
     Matriz<bool> A(n + 1, n + 1, false);
     Matriz<bool> B(n + 1, n + 1, false);
     Matriz<bool> C(n + 1, n + 1, false);
 
     //CASOS BASE
-    for (int i = 1; i <= n; i++) {
-        if (cadena[i - 1] == 'a') A[i][i] = true;
-        if (cadena[i - 1] == 'b') B[i][i] = true;
-        if (cadena[i - 1] == 'c') C[i][i] = true;
+    for (int i = 0; i <= n; i++) {
+        if (cadena[i] == 'a') A[i][i] = true;
+        if (cadena[i] == 'b') B[i][i] = true;
+        if (cadena[i] == 'c') C[i][i] = true;
     }
 
-    for (int d = 1; d <= n - 1; ++d) {// recorre diagonales
-        for (int i = 1; i <= n - d; ++i) { // recorre elementos de diagonal
+    for (int d = 1; d <= n; ++d) {// recorre diagonales
+        for (int i = 0; i <= n - d; ++i) { // recorre elementos de diagonal
             int j = i + d;
             for (int k = i; k <= j - 1; ++k) {
                 //FORMAS DE A (AxC, BxC, CxA)
@@ -39,7 +39,7 @@ int esPosible(string const cadena) {
             }
         }
     }
-    return A[1][n];
+    return A[0][n];
 }
 
 bool resuelveCaso() {
